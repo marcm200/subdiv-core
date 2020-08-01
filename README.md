@@ -16,7 +16,7 @@ the code comes with no warranty.
 ![example subdivision](./_roots.gif)
 
 The software reads in a provided text file with the coefficients of the (at most degree-XXX 6 XXX) polynomial, computes
-regions of definite roots if found and outputs a list of ![example subdivision](./_text1.gif)<b><u>exact rational box coordinates where definitely roots lie within</b></u> into the log text file `_subdiv-core.log`.
+regions of definite roots if found and outputs a list of <img ![example subdivision](./_text1.gif) into the log text file `_subdiv-core.log`.
 
 Additionally an image in `_roots.bmp` is created that shows an overview of the subdivision process. The unit circle is drawn in blue,
 definite root containing pixels are black, definitely no root containing are white, gray are undecided and red lines
