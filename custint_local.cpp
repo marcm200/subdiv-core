@@ -11,13 +11,15 @@
 	ensure correctness of the implementation)
 	
 	CAUTION: Every arithmetics routine cust^NNN_ZAB()
-			 ASSUMES rounding mode is set to UPWARDS
+		 ASSUMES rounding mode is set to UPWARDS
 			 
-			 It is at the discretion of the user to
-			 ensure this by defining a struct of
-			 type CustRoundingUpwards
+		 It is at the discretion of the user to
+		 ensure this by defining a struct of
+		 type CustRoundingUpwards
 	
-	based on the article:
+		(except for sqrt-functions uses rounding mode switch)
+
+based on the article:
 
 	Interval arithmetic with fixed rounding modw
 	by S. Rump et al., 2016
@@ -677,7 +679,7 @@ int32_t custCplxSqrt_ZA(
 	CustInterval a2,b2,a2b2,sqrta2b2;
 	
 	// direct return to reduce number of
-	// operations, as sqrt is then compüted by
+	// operations, as sqrt is then compÃ¼ted by
 	// a different IA library, e.g. kv
 	if (custMul_ZAB(a2,val.re,val.re) != 0) return -1;
 	if (custMul_ZAB(b2,val.im,val.im) != 0) return -1;
