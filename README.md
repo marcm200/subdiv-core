@@ -19,10 +19,15 @@ the code comes with no warranty.
 ![example subdivision](./_roots.gif)
 
 The software reads in a provided text file with the coefficients of the (at most degree-10) polynomial, computes
-regions of definite roots if found and outputs a list of ![example subdivision](./_text1.gif) into the log text file `_subdiv-core.log`.
+regions of definite roots if possible and outputs a list of <b><u>exact rational coordinates of boxes where definitely a root lies within</u></b> into the log text file `_subdiv-core.log`, e.g.
+
+    #1 DEFINITE:
+    exact [-6447536185278464*2^-57..-6436541069000704*2^-57]+i*[-6317244057387008*2^-54..-6315869667852288*2^-54])
+    approx [-0.04473876953125..-0.0446624755859375] x [-0.350677490234375..-0.3506011962890625]
+    *** fully in unit circle ***   ||squared=[9001141773795328*2^-56....9005488582688768*2^-56] (approx [0.12492..0.12498]
 
 Additionally an image in `_roots.bmp` is created that shows an overview of the subdivision process. The unit circle is drawn in blue,
-definite root containing pixels are black, definitely no root containing are white, gray are undecided and red lines
+definite root containing regions are black (each geometrically connected black region contains at least one root somewhere therein), definitely no root containing are white, gray are undecided and red lines
 indicate the size at which a box has been discarded.
 
 All floating point operations are performed in interval arithmetics with outward rounding - except for reading values from file and printing.
@@ -110,7 +115,7 @@ at the discretion of the user to only provide accurately representable numbers i
 are treated as int32_t (coefficient position, maximal subdivision depth) or int64_t (coefficient value) depending on its use. 
 
 - The `D=q,a,b` input file line
-e.g. invokes a double precision division a/q and are subject to the set rounding mode (constant upward). If q is a power of 2, the division is rounding-free as by floating point standard.
+e.g. invokes double precision divisions a/q and are subject to the set rounding mode (constant upward). If q is a power of 2, the division is rounding-free as by floating point standard.
 
 - The image should not be taken as exact as conversion from box coordinates to screen coordinates
 is not done in an error-controlled manner. It merely serves as a visual guide as to how the subdivision proceeded.
@@ -121,11 +126,15 @@ might not be found. In that case it is recommended enlarging the `RANGE` paramet
 - Box width computation does not demand error-controlled calculation as it is merely a "return now or later" decision and not one
 affecting whether a root is found or not. Box widths very close to the provided threshold at `STOP=WIDTH,w` may or may not lead to further subdivision depending on rounding effect.
 
+- If the width of a box is in the range of double precision's epsilon, the Newton operator will be larger than the box. This can lead to the
+disappearence of a formerly known root containing box and return it as undecided but the result is still mathematically valid, although non-informative. Care should be taken when using `STOP=DEEPEST` with large values. Stopping at a threshold
+width of a decent large amount is recommended instead.
+
 ### (4) Further information
 
 Background on the implementation can be found here
 
-http:https://fractalforums.org/fractal-mathematics-and-new-theories/28/root-finding-via-subdivisionia/3658/msg23217#new
+https://fractalforums.org/fractal-mathematics-and-new-theories/28/root-finding-via-subdivisionia/3658/msg22859#msg22859
 
 ### (5) Contact
 
