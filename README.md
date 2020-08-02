@@ -1,6 +1,3 @@
-em { color: green; }
-
-
 # subdiv-core
 Interval Newton operator to detect root containing regions for complex polynomials via subdivision using interval arithmetics and outward rounding to error-control.
 
